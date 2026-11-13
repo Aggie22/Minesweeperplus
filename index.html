@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Minesweeper+</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <h1 class="logo">Minesweeper<span>+</span></h1>
+
+    <div class="seg" id="modes" role="group" aria-label="Game mode">
+      <button type="button" data-mode="normal">Normal</button>
+      <button type="button" data-mode="zen">Zen</button>
+      <button type="button" data-mode="trial">Time Trial</button>
+    </div>
+
+    <div class="controls">
+      <label class="visually-hidden" for="diff">Board size</label>
+      <select id="diff" class="btn">
+        <option value="beginner">Beginner · 9×9</option>
+        <option value="intermediate">Intermediate · 16×16</option>
+        <option value="expert">Expert · 30×16</option>
+        <option value="custom">Custom…</option>
+      </select>
+      <button type="button" class="btn" id="flagMode" aria-pressed="false" title="Taps place flags instead of digging">Flag mode</button>
+      <button type="button" class="btn" id="themeBtn">Textures</button>
+    </div>
+  </header>
+
+  <form id="customForm" class="custom-form" hidden>
+    <label>Width <input type="number" id="cw" min="5" max="40" required></label>
+    <label>Height <input type="number" id="ch" min="5" max="30" required></label>
+    <label>Mines <input type="number" id="cm" min="1" required></label>
+    <button class="btn primary">Apply</button>
+  </form>
+
+  <main>
+    <p id="modeInfo" class="mode-info"></p>
+
+    <section class="frame">
+      <div class="hud">
+        <div class="lcd" id="minesLeft" title="Mines left">010</div>
+        <button type="button" id="face" class="face" title="New game (N)">🙂</button>
+        <div class="lcd" id="clock" title="Time">000</div>
+      </div>
+      <div class="board-wrap">
+        <div id="board" class="board" role="grid" aria-label="Minefield"></div>
+      </div>
+    </section>
+
+    <div class="status-row">
+      <p id="status" role="status" aria-live="polite"></p>
+      <button type="button" class="btn primary" id="nextBtn" hidden>Play again</button>
+    </div>
+
+    <p class="help">
+      Click to dig · right-click or long-press to flag · click a number to open around it ·
+      <kbd>N</kbd> new game · arrows + <kbd>Space</kbd>/<kbd>F</kbd> for keyboard play
+    </p>
+  </main>
+
+  <dialog id="themeDlg" class="dialog">
+    <div class="dialog-head">
+      <h2>Textures</h2>
+      <button type="button" class="btn" id="themeClose">Done</button>
+    </div>
+
+    <div id="themeGrid" class="theme-grid"></div>
+
+    <section class="custom-editor">
+      <h3>Make your own</h3>
+      <p class="hint">Upload images for any part. Whatever you leave empty is borrowed from the base pack. Images stay in this browser.</p>
+      <label class="base-row">Base pack
+        <select id="customBase" class="btn"></select>
+      </label>
+      <div id="slots" class="slots"></div>
+      <p id="customMsg" class="hint" role="status"></p>
+    </section>
+  </dialog>
+
+  <script src="js/game.js"></script>
+  <script src="js/themes.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
